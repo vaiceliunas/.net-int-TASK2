@@ -22,11 +22,9 @@ namespace AsyncAwait.Task2.CodeReviewChallenge.Middleware
         public async Task InvokeAsync(HttpContext context)
         {   
             string path = context.Request.Path;
-            var staticRegTask = _statisticService.RegisterVisitAsync(path);
-            await staticRegTask;
+            await _statisticService.RegisterVisitAsync(path);
             UpdateHeaders();
-            Console.WriteLine(staticRegTask.Status); // just for debugging purposes
-            
+
             void UpdateHeaders()
             {
                 context.Response.Headers.Add(
